@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belgravia Quadrant</title>
+<meta name="description" content="Belgravia Quadrant. Built on trust. Moved with care. Conveyancing with solid foundations.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%236B1F2A'/%3E%3Ctext x='19' y='43' font-family='Georgia,serif' font-size='28' fill='%23FAF7F2' text-anchor='middle'%3EB%3C/text%3E%3Crect x='31.5' y='18' width='1.2' height='30' fill='%23D9BC86'/%3E%3Ctext x='45' y='43' font-family='Georgia,serif' font-size='28' fill='%23FAF7F2' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Belgravia Quadrant palette (brand guidelines, p.12) */
+    --maroon:#6B1F2A; --maroon-deep:#4F161F;
+    --beige:#E8DCC8; --beige-light:#EFE5D3; --paper:#FAF7F2;
+    --charcoal:#2B2B2B; --gold:#B08D57; --gold-light:#D9BC86;
+    --muted:#5e5752; --line:#ddd0bb;
+    --serif:"Bodoni Moda", "Didot", Georgia, serif;
+    --sans:"Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--sans);color:var(--charcoal);background:var(--paper);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--maroon)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.15;margin:0 0 .5em;color:var(--maroon)}
+  h1{font-size:clamp(2.6rem,5.4vw,4.2rem);font-style:italic;font-weight:400}
+  h2{font-size:clamp(2rem,3.4vw,2.7rem)}
+  h3{font-size:1.4rem}
+  p{margin:0 0 1em}
+  .eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--maroon);font-weight:700;margin-bottom:14px;display:block}
+  .rule{width:64px;height:1px;background:var(--gold);border:0;margin:22px 0 26px}
+
+  /* logo 2: heritage horizontal lockup */
+  .lockup{display:inline-flex;align-items:center;gap:.5em;text-decoration:none;color:var(--maroon)}
+  .lockup .mono{font-family:var(--serif);font-weight:400;font-size:1em;line-height:1;display:inline-flex;align-items:center;gap:.16em;letter-spacing:0}
+  .lockup .mono i{display:inline-block;width:1.5px;height:.82em;background:var(--gold)}
+  .lockup .name{font-family:var(--serif);font-size:.24em;letter-spacing:.32em;line-height:1.35;text-transform:uppercase;padding-left:.2em}
+  .lockup .tag{display:block;font-style:italic;letter-spacing:0;text-transform:none;font-size:1.05em;margin-top:.7em;color:var(--charcoal)}
+  .lockup.on-dark{color:var(--paper)}
+  .lockup.on-dark .mono i{background:var(--gold-light)}
+  .lockup.on-dark .tag{color:var(--gold-light)}
+
+  /* four-dot mark */
+  .dots{display:inline-grid;grid-template-columns:repeat(2,var(--d,10px));gap:calc(var(--d,10px)*.35)}
+  .dots span{width:var(--d,10px);height:var(--d,10px);border-radius:50%;background:var(--maroon)}
+  .dots span.g{background:var(--gold)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:10;background:rgba(250,247,242,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  header .lockup{font-size:40px}
+  nav{display:flex;align-items:center;gap:28px}
+  nav a{text-decoration:none;font-size:.9rem;color:var(--charcoal)}
+  nav a:hover{color:var(--maroon)}
+  nav a.cta{background:var(--maroon);color:var(--paper);padding:9px 18px}
+  nav a.cta:hover{background:var(--maroon-deep);color:var(--paper)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);padding:8px 12px;font:inherit;font-size:.9rem;color:var(--maroon);cursor:pointer}
+
+  /* buttons */
+  .btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+  .btn{display:inline-block;padding:13px 26px;text-decoration:none;font-size:.95rem;font-weight:700;border:1px solid var(--maroon)}
+  .btn-solid{background:var(--maroon);color:var(--paper)}
+  .btn-solid:hover{background:var(--maroon-deep)}
+  .btn-ghost{color:var(--maroon);background:transparent}
+  .btn-ghost:hover{background:var(--maroon);color:var(--paper)}
+  .btn-light{background:var(--paper);color:var(--maroon);border-color:var(--paper)}
+  .btn-light:hover{background:var(--beige)}
+
+  /* hero: heritage circles */
+  .hero{
+    background-color:var(--beige-light);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23DCCBAE' stroke-width='1'%3E%3Ccircle cx='32' cy='32' r='32'/%3E%3Ccircle cx='0' cy='0' r='32'/%3E%3Ccircle cx='64' cy='0' r='32'/%3E%3Ccircle cx='0' cy='64' r='32'/%3E%3Ccircle cx='64' cy='64' r='32'/%3E%3C/g%3E%3C/svg%3E");
+    border-bottom:1px solid var(--line)
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;padding-top:96px;padding-bottom:96px}
+  .hero .lockup{font-size:84px;margin-bottom:34px}
+  .hero p.lead{font-size:1.12rem;max-width:50ch;color:var(--charcoal)}
+  .corners{background:var(--maroon);color:var(--paper);padding:40px 38px 30px}
+  .corners h2{color:var(--paper);font-size:1.75rem;margin-bottom:22px}
+  .corners dl{margin:0}
+  .corners div{border-top:1px solid rgba(217,188,134,.45);padding:14px 0 12px}
+  .corners div:last-child{border-bottom:1px solid rgba(217,188,134,.45)}
+  .corners dt{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);font-weight:700;margin-bottom:3px}
+  .corners dd{margin:0;font-size:.95rem;color:#f2ebe0}
+  /* regulation and accreditation band */
+  .accred{background:var(--paper);border-bottom:1px solid var(--line);padding:72px 0}
+  .accred-card{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:center;background:var(--beige-light);border:1px solid var(--line);border-top:2px solid var(--maroon);padding:44px 48px}
+  .accred h2{font-size:clamp(1.7rem,2.6vw,2.2rem);margin:0 0 .45em}
+  .accred p{color:var(--muted);font-size:.96rem;margin:0}
+  .accred .eyebrow{margin-bottom:12px}
+  .badges{list-style:none;margin:0;padding:0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .badges img{height:84px;width:auto;display:block}
+  .sra-slot{position:relative;display:block;width:132px;min-height:78px}
+  .sra-slot iframe{position:relative;z-index:1;border:0;width:132px;height:78px;background:transparent}
+  .sra-fallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:.72rem;font-weight:700;line-height:1.35;color:var(--maroon);border:1px solid var(--gold);background:var(--paper);padding:8px}
+
+  section{padding:104px 0}
+  .alt{background:var(--beige-light)}
+
+  /* about */
+  .two{display:grid;grid-template-columns:1fr 1.15fr;gap:80px;align-items:start}
+  .about-quote{font-family:var(--serif);font-style:italic;font-size:1.55rem;line-height:1.4;color:var(--maroon);border-left:2px solid var(--gold);padding-left:24px;margin-top:8px}
+
+  /* four steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px}
+  .step{border-top:2px solid var(--maroon);padding-top:18px}
+  .step .dots{--d:11px;margin-bottom:14px}
+  .step h3{margin-bottom:.3em}
+  .step p{color:var(--muted);font-size:.96rem;margin:0}
+
+  /* standards */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);margin-top:48px}
+  .cell{padding:36px 34px 28px 0;border-right:1px solid var(--line)}
+  .cell + .cell{padding-left:34px}
+  .cell:last-child{border-right:0}
+  .num{font-family:var(--serif);color:var(--maroon);font-size:1.1rem;display:block;margin-bottom:10px}
+  .num::after{content:"";display:block;width:28px;height:1px;background:var(--gold);margin-top:10px}
+  .cell p{color:var(--muted);font-size:.98rem}
+
+  /* model */
+  .model-head{max-width:720px}
+  .diagram{margin:56px 0 10px;background:var(--paper);border:1px solid var(--line);padding:44px 40px}
+  .teams{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .team{border:1px solid var(--line);padding:22px 22px 18px;background:var(--beige-light);text-align:center}
+  .team .tag{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .team .tname{font-family:var(--serif);font-size:1.35rem;color:var(--maroon);margin:6px 0 4px}
+  .team small{color:var(--muted);font-size:.85rem}
+  .connector{height:34px;display:grid;grid-template-columns:repeat(3,1fr)}
+  .connector span{border-left:1px dashed var(--gold);margin-left:50%}
+  .umbrella{background:var(--maroon);color:#efe6da;padding:26px 30px;text-align:center}
+  .umbrella .tname{font-family:var(--serif);font-size:1.6rem;color:var(--paper);margin-bottom:4px}
+  .umbrella ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;font-size:.88rem;color:#ead9c4}
+  .umbrella li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold-light);margin-right:9px;vertical-align:middle}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px}
+  .split h3{margin-bottom:.4em}
+  .list{list-style:none;padding:0;margin:0}
+  .list li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+  .list li strong{color:var(--charcoal);font-weight:700;display:block;margin-bottom:2px}
+
+  /* join */
+  .join{background:var(--maroon);color:#efe6da}
+  .join h2{color:var(--paper)}
+  .join .eyebrow{color:var(--gold-light)}
+  .join p{color:#ead9c4;max-width:60ch}
+  .join .list li{border-color:rgba(217,188,134,.3);color:#e3cfb9}
+  .join .list li strong{color:var(--paper)}
+  .join .tagline{font-family:var(--serif);font-style:italic;color:var(--gold-light);font-size:1.25rem;margin-top:18px}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  .card{border:1px solid var(--line);padding:34px;background:var(--paper)}
+  .card dt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:18px}
+  .card dt:first-child{margin-top:0}
+  .card dd{margin:4px 0 0;font-size:1.05rem;color:var(--maroon)}
+  .ph{background:var(--beige);color:var(--maroon-deep);padding:1px 6px;font-size:.9em;border:1px dashed var(--gold)}
+
+  /* regulatory */
+  .reg h3{font-size:1.3rem;margin-top:1.6em}
+  .reg p,.reg li{color:var(--muted);font-size:.96rem}
+  .reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  .reg .badges{justify-content:flex-start;gap:28px;margin:18px 0 6px}
+
+  footer{background:var(--maroon-deep);color:#d6c3ad;font-size:.86rem;padding:52px 0}
+  footer .row{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  footer .lockup{font-size:46px;margin-bottom:18px}
+  footer p{margin:0 0 .6em;max-width:70ch}
+  footer a{color:var(--paper)}
+  footer .bot{margin-top:34px;padding-top:20px;border-top:1px solid rgba(217,188,134,.25);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.82rem;color:#bfa98e}
+  footer .bot p{margin:0}
+  footer .ph{background:rgba(255,255,255,.08);color:var(--gold-light);border-color:rgba(217,188,134,.5)}
+
+  @media (max-width:960px){
+    .accred-card{grid-template-columns:1fr;gap:32px;padding:34px 28px}
+    .badges{justify-content:flex-start}
+    nav{display:none;position:absolute;top:76px;left:0;right:0;background:var(--paper);flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line)}
+    nav.open{display:flex}
+    nav a{padding:14px 28px;border-top:1px solid var(--line)}
+    nav a.cta{margin:12px 28px 16px;text-align:center}
+    .menu-btn{display:block}
+    .hero-grid,.two,.split,.contact-grid,.reg-grid{grid-template-columns:1fr;gap:40px}
+    .hero-grid{padding-top:72px;padding-bottom:72px}
+    .hero .lockup{font-size:60px}
+    .steps{grid-template-columns:1fr 1fr}
+    .grid3{grid-template-columns:1fr}
+    .cell,.cell + .cell{padding:28px 0;border-right:0;border-bottom:1px solid var(--line)}
+    .teams{grid-template-columns:1fr}
+    .connector{grid-template-columns:1fr}
+    .connector span:nth-child(n+2){display:none}
+    .diagram{padding:28px 20px}
+    section{padding:80px 0}
+  }
+  @media (max-width:560px){
+    .steps{grid-template-columns:1fr}
+    .hero .lockup{font-size:48px}
+    header .lockup{font-size:34px}
+    .corners{padding:30px 24px 22px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a href="#top" class="lockup" aria-label="Belgravia Quadrant home">
+      <span class="mono">B<i></i>Q</span>
+      <span class="name">Belgravia<br>Quadrant</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav">
+      <a href="#firm">The firm</a>
+      <a href="#steps">How it works</a>
+      <a href="#model">How we are structured</a>
+      <a href="#join">For lawyers</a>
+      <a href="#regulatory">Regulatory</a>
+      <a class="cta" href="#contact">Speak to us</a>
+    </nav>
+  </div>
+</header>
+<main id="top">
+
+<section class="hero" style="padding:0">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="lockup" aria-hidden="true">
+        <span class="mono">B<i></i>Q</span>
+        <span class="name">Belgravia<br>Quadrant</span>
+      </div>
+      <h1>Built on trust.<br>Moved with care.</h1>
+      <p class="lead">Conveyancing with solid foundations. We keep buyers, sellers, agents and lenders informed at every step, with careful legal work and clear ownership of every file.</p>
+      <div class="btns">
+        <a class="btn btn-solid" href="#contact">Speak to us</a>
+        <a class="btn btn-ghost" href="#steps">See how it works</a>
+      </div>
+    </div>
+    <aside class="corners" aria-label="The four corners of the deal">
+      <h2>Where every corner of the deal meets.</h2>
+      <dl>
+        <div><dt>Buyer</dt><dd>Plain-English updates before you need to ask.</dd></div>
+        <div><dt>Seller</dt><dd>Issues raised early, so your sale keeps moving.</dd></div>
+        <div><dt>Agent</dt><dd>Regular progress updates for your sales progression.</dd></div>
+        <div><dt>Lender</dt><dd>Accurate reporting and prompt responses.</dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<section id="firm">
+  <div class="wrap two">
+    <div>
+      <span class="eyebrow">The firm</span>
+      <h2>One idea, four corners.</h2>
+      <p class="about-quote">We would rather do fewer things exceptionally well than many things adequately.</p>
+    </div>
+    <div>
+      <p>Belgravia Quadrant is built around one idea: every corner of a property deal, meaning buyer, seller, agent and lender, looked after properly.</p>
+      <p>The name joins two ideas. Belgravia is the London district developed from the 1820s for the Grosvenor estate, known for well-planned, well-built property. A quadrant is one quarter of a whole. Together they give the firm its four-part framework: four steps and four corners.</p>
+      <p>We are traditional in the things that matter: careful drafting, clear advice, proper record keeping and courtesy. We are modern where it helps clients: efficient processes, sensible use of technology and plain communication.</p>
+    </div>
+  </div>
+</section>
+
+<section id="steps" class="alt">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>Four steps. One safe move.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="dots" aria-hidden="true"><span class="g"></span><span></span><span></span><span></span></span>
+        <h3>Instruct</h3>
+        <p>We open the file and plan the move with you.</p>
+      </div>
+      <div class="step">
+        <span class="dots" aria-hidden="true"><span></span><span class="g"></span><span></span><span></span></span>
+        <h3>Investigate</h3>
+        <p>We review the title, searches and contracts, and raise issues early.</p>
+      </div>
+      <div class="step">
+        <span class="dots" aria-hidden="true"><span></span><span></span><span class="g"></span><span></span></span>
+        <h3>Exchange</h3>
+        <p>Contracts are signed and the completion date is fixed.</p>
+      </div>
+      <div class="step">
+        <span class="dots" aria-hidden="true"><span></span><span></span><span></span><span class="g"></span></span>
+        <h3>Complete</h3>
+        <p>Funds move and the keys are handed over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <span class="eyebrow">Our standards</span>
+    <h2>What clients can expect.</h2>
+    <div class="grid3">
+      <div class="cell">
+        <span class="num">I.</span>
+        <h3>Careful work</h3>
+        <p>Every matter is handled with care and attention to detail, and reviewed to a standard we would be proud to put our name to.</p>
+      </div>
+      <div class="cell">
+        <span class="num">II.</span>
+        <h3>Clear ownership</h3>
+        <p>You will know who is handling your matter and who supervises it. The people doing the work are accountable for it.</p>
+      </div>
+      <div class="cell">
+        <span class="num">III.</span>
+        <h3>Proper regulation</h3>
+        <p>All of our work is carried out within the firm's SRA authorisation, with the protections that brings for every client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="alt">
+  <div class="wrap">
+    <div class="model-head">
+      <span class="eyebrow">How we are structured</span>
+      <h2>Teams with their own brand. One regulated firm.</h2>
+      <p>Belgravia Quadrant allows specialist teams within the firm to operate under their own brand. Each team takes ownership of the quality of its work and the processes behind it, so clients deal with a focused group that knows its field.</p>
+      <p>Every team sits inside Belgravia Quadrant's regulated legal framework. The firm, not the brand, is the SRA-authorised body, and the same rules, supervision and client protections apply whichever team you instruct.</p>
+    </div>
+
+    <div class="diagram" aria-label="Diagram: team brands operating within Belgravia Quadrant">
+      <div class="teams">
+        <div class="team"><div class="tag">Team brand</div><div class="tname">Team A</div><small>Owns quality and process</small></div>
+        <div class="team"><div class="tag">Team brand</div><div class="tname">Team B</div><small>Owns quality and process</small></div>
+        <div class="team"><div class="tag">Team brand</div><div class="tname">Team C</div><small>Owns quality and process</small></div>
+      </div>
+      <div class="connector" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="umbrella">
+        <div class="tname">Belgravia Quadrant</div>
+        <div>The SRA-authorised firm</div>
+        <ul>
+          <li>SRA authorisation</li><li>COLP and COFA oversight</li><li>Client account</li><li>Professional indemnity insurance</li><li>Complaints procedure</li><li>Supervision and file review</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3>What each team owns</h3>
+        <ul class="list">
+          <li><strong>Its brand</strong>A distinct name and identity that clients in its field recognise.</li>
+          <li><strong>Its quality</strong>Responsibility for the standard of every piece of work it delivers.</li>
+          <li><strong>Its processes</strong>The way it runs matters, communicates with clients and improves over time.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What the firm guarantees</h3>
+        <ul class="list">
+          <li><strong>Regulation</strong>All work is carried out by Belgravia Quadrant under its SRA authorisation.</li>
+          <li><strong>Client protection</strong>Client money, insurance and complaints are handled by the firm to SRA standards.</li>
+          <li><strong>Transparency</strong>Every team brand makes clear that it is part of Belgravia Quadrant, so clients always know who is regulated and who they can complain to.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="join" class="join">
+  <div class="wrap two">
+    <div>
+      <span class="eyebrow">For lawyers and partners</span>
+      <h2>Build your practice under your own name.</h2>
+      <p class="tagline">Strong links, smooth moves.</p>
+    </div>
+    <div>
+      <p>If you lead a team that cares about the quality of its work, Belgravia Quadrant offers a way to run it under your own brand without carrying the full weight of authorising and running a firm alone.</p>
+      <ul class="list">
+        <li><strong>Ownership</strong>Shape your team's identity, standards and ways of working.</li>
+        <li><strong>A regulated home</strong>Practise within an established SRA-authorised firm with clear compliance oversight.</li>
+        <li><strong>Like-minded colleagues</strong>Join a small firm that values careful, exceptional work.</li>
+      </ul>
+      <div class="btns"><a class="btn btn-light" href="#contact">Start a conversation</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="alt">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow">Contact</span>
+      <h2>Speak to us.</h2>
+      <p>Whether you are buying, selling, referring a client or would like to talk about bringing your team to the firm, please get in touch. We will tell you plainly whether we can help.</p>
+      <p style="color:var(--muted);font-size:.95rem">Please do not send confidential information until we have confirmed we can act for you.</p>
+    </div>
+    <div class="card">
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:hello@mayfair.legal" style="text-decoration:none">hello@mayfair.legal</a></dd>
+        <dt>Telephone</dt><dd><a href="tel:+442046206677" style="text-decoration:none">+44 20 4620 6677</a></dd>
+        <dt>Office</dt><dd>Wolverhampton: Office 324, 84 Salop Street, WV3 0SR<br>London: WeWork, 5 Merchant Square, W2 1AS</dd>
+        <dt>Hours</dt><dd>Monday to Friday, 9.00am to 5.30pm</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="regulatory" class="reg">
+  <div class="wrap">
+    <span class="eyebrow">Regulatory information</span>
+    <h2>Regulation and complaints.</h2>
+    <div class="reg-grid">
+      <div>
+        <h3>Our regulator</h3>
+        <p>Belgravia Quadrant <span class="ph">[legal name, e.g. Limited]</span> is authorised and regulated by the Solicitors Regulation Authority (SRA number <span class="ph">[SRA no.]</span>). The SRA's rules and standards can be found at <a href="https://www.sra.org.uk/solicitors/standards-regulations/">sra.org.uk</a>.</p>
+        <p>All team brands operating within the firm are trading names of Belgravia Quadrant. Legal services provided under any team brand are provided by Belgravia Quadrant under its SRA authorisation.</p>
+        <h3>Professional indemnity insurance</h3>
+        <p>We hold professional indemnity insurance in line with SRA requirements. Insurer: <span class="ph">[insurer]</span>. Territorial coverage: <span class="ph">[coverage]</span>.</p>
+      </div>
+      <div>
+        <h3>Complaints</h3>
+        <p>If you are unhappy with our service, please contact <span class="ph">[complaints partner / email]</span>. We will acknowledge your complaint and aim to resolve it within eight weeks. Our full complaints procedure is available on request.</p>
+        <p>If we have not resolved your complaint within eight weeks, or you are not satisfied with our final response, you may be able to refer it to the Legal Ombudsman, PO Box 6167, Slough, SL1 0EH, 0300 555 0333, <a href="https://www.legalombudsman.org.uk">legalombudsman.org.uk</a>. Normally you must refer your complaint within six months of our final response, and no more than one year from the date of the problem or from when you should reasonably have known about it.</p>
+        <p>If you are concerned about our behaviour, for example dishonesty or the handling of client money, you can raise this with the <a href="https://www.sra.org.uk/consumers/problems/report-solicitor/">Solicitors Regulation Authority</a>.</p>
+        <h3>Pricing and services</h3>
+        <p>Where required by the SRA Transparency Rules, price and service information for the relevant services is published at <span class="ph">[link to pricing page]</span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap row">
+    <div>
+      <div class="lockup on-dark" aria-hidden="true">
+        <span class="mono">B<i></i>Q</span>
+        <span class="name">Belgravia<br>Quadrant<span class="tag">Built on trust. Moved with care.</span></span>
+      </div>
+      <p>Belgravia Quadrant <span class="ph">[legal name]</span> is a company registered in England and Wales, company number <span class="ph">[company no.]</span>. Registered office: <span class="ph">[registered office]</span>.</p>
+      <p>Authorised and regulated by the Solicitors Regulation Authority, SRA number <span class="ph">[SRA no.]</span>.</p>
+    </div>
+    <div>
+      <p><a href="#regulatory">Regulatory information</a></p>
+      <p><a href="#regulatory">Complaints</a></p>
+      <p><span class="ph">[Privacy notice]</span> · <span class="ph">[Cookies]</span></p>
+      <p>© <span id="yr">2026</span> Belgravia Quadrant</p>
+    </div>
+  </div>
+</footer>
+<script>
+  var b=document.getElementById('menuBtn'),n=document.getElementById('nav');
+  b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');b.setAttribute('aria-expanded','false')})});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
